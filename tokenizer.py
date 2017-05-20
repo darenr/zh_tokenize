@@ -13,7 +13,9 @@ import sys
 
 class ChineseWordTokenizer:
 
-    def __init__(self, verbose=False):
+    MAX_MISSES = 6
+
+    def __init__(self, verbose=False, includeSimplified = True, includeTraditional = False):
         start_load_time = time.time() * 1000
 
         dictionary_gzfile = os.environ['ZH_DICT'] if 'ZH_DICT' in os.environ else 'dict/cedict_1_0_ts_utf-8_mdbg.txt.gz'
@@ -23,18 +25,19 @@ class ChineseWordTokenizer:
                 if line.startswith('#'):
                     pass
                 else:
-                    # format is space separated, chinese tokens are followed by pronounciation demarked
-                    # with the token surrounded by square brackets, for example:
+                    # Format:
+                    # Traditional Simplified [pin1 yin1] /English equivalent 1/equivalent 2/
                     # 龥 龥 [yu4] /variant of 籲|吁[yu4]/
-                    # consume tokens until [here]
 
-                    accumulator = []
-                    for token in line.split():
-                        if token.startswith('['): # we ignore everything after and including this token
-                            # add to words list for indexing
-                            words.append(''.join(accumulator))
-                        else:
-                            accumulator += token.strip()
+                    parts = iter(line.split())
+                    traditional = parts.next()
+                    simplified = parts.next()
+
+                    if includeTraditional:
+                        words.append(traditional)
+
+                    if includeSimplified:
+                        words.append(simplified)
 
             self.trie = marisa_trie.Trie(words)
 
@@ -43,9 +46,48 @@ class ChineseWordTokenizer:
             print ' *', 'dictionary loaded and indexed in', end_load_time - start_load_time, 'ms'
 
     def tokenize(self, u_str):
-        return u_str.split()
+        words = []
 
+        i = 0
+        while i < len(u_str):
+            length = 1
+            loop = False
+            misses = 0
+            lastCorrectLen = 1
+            somethingFound = False
+            while True:
+                word = u_str[i:i+length]
+                if self.trie.has_keys_with_prefix(word):
+                    somethingFound = True
+                    lastCorrectLen = length
+                    loop = True
+                else:
+                    misses += 1
+                    loop = misses < ChineseWordTokenizer.MAX_MISSES;
+
+                length += 1
+
+                if i + length > len(u_str):
+                    loop = False
+
+                if not loop:
+                    break
+
+            i += 1
+
+            if somethingFound:
+                word = u_str[i:i+lastCorrectLen]
+                if word:
+                    words.append(word)
+                    i += lastCorrectLen - 1
+
+
+        return words
+
+    def printable(self, list):
+        return u' '.join(["[" + x + "]" for x in list])
 
 if __name__ == "__main__":
     tokenizer = ChineseWordTokenizer(verbose=True)
-    print tokenizer.tokenize(u"hello world")
+    tokens = tokenizer.tokenize(u"国家都有自己的政府。政府是税收的主体，可以实现福利的合理利用。")
+    print len(tokens), tokenizer.printable(tokens)
