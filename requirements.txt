@@ -1,0 +1,3 @@
+marisa-trie
+requests
+nose
