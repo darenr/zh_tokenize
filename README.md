@@ -1,5 +1,8 @@
 # zh_tokenize
 
+[![Project status](https://img.shields.io/badge/Project%20Status-Complete-brightgreen.svg)](#status)
+
+
 Tokenize Chinese using a Trie (prefix-search) based on work done by @kennycason
 
 ZH gzipped file dictionary can be downloaded from:
@@ -16,4 +19,19 @@ export ZH_DICT=/fully/qualified/path/to/cedict-VERSION.gz
 
 Algorithm:
 
-Walked through sentences character-by-character observing if substrings exist in the dictionary. If so parse as a token. This is self correcting for words not in the dictionary. The output will be utf-8 encoded tokens space separated suitable for using in a search engine.
+Walk through sentences character-by-character checking if substring exist in the Trie. If so parse as a token. This is self correcting for words not in the dictionary. The output will be utf-8 encoded tokens space separated suitable for using in a search engine.
+
+Example Usage:
+
+```
+from tokenizer import ChineseWordTokenizer
+
+tokens = tokenizer.tokenize(u"国家都有自己的政府。政府是税收的主体，可以实现福利的合理利用。")
+print len(tokens), tokenizer.printable(tokens)
+```
+
+Produces:
+
+```
+17 [家都] [有] [自] [己的] [政] [府。] [府是] [税] [收的] [主] [体，] [以实] [现福] [利的] [合] [理利] [用。]
+```
