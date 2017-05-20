@@ -23,4 +23,4 @@ def test_5():
     assert len(tokenizer.tokenize(u"請問")) == 1
 
 def test_6():
-    assert len(tokenizer.tokenize(u"你會說英語嗎")) == 4
+    assert len(tokenizer.tokenize(u"你會說英語嗎")) == 2
