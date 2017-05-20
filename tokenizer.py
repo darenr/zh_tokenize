@@ -15,7 +15,7 @@ class ChineseWordTokenizer:
 
     MAX_MISSES = 6
 
-    def __init__(self, verbose=False, includeSimplified = True, includeTraditional = False):
+    def __init__(self, verbose=False, includeSimplified = True, includeTraditional = True):
         start_load_time = time.time() * 1000
 
         dictionary_gzfile = os.environ['ZH_DICT'] if 'ZH_DICT' in os.environ else 'dict/cedict_1_0_ts_utf-8_mdbg.txt.gz'
