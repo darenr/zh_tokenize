@@ -1,7 +1,6 @@
 # zh_tokenize
 
 [![Magnum CI](https://img.shields.io/magnumci/ci/96ffb83fa700f069024921b0702e76ff.svg)]()
-[![AUR](https://img.shields.io/aur/votes/yaourt.svg)]()
 
 Tokenize Chinese using a Trie (prefix-search) based on work done by @kennycason
 
@@ -35,10 +34,10 @@ Produces:
 
 ```
 >>> from tokenizer import ChineseWordTokenizer
->>> 
+>>>
 >>> tokenizer = ChineseWordTokenizer(verbose=False, includeSimplified=True, includeTraditional=True)
 >>> tokens = tokenizer.tokenize(u"国家都有自己的政府。政府是税收的主体，可以实现福利的合理利用。")
 >>> print 'Number of Tokens:', len(tokens), 'Tokens:', tokenizer.printable(tokens)
 Number of Tokens: 17 Tokens: [家都] [有] [自] [己的] [政] [府。] [府是] [税] [收的] [主] [体，] [以实] [现福] [利的] [合] [理利] [用。]
->>> 
+>>>
 ```
