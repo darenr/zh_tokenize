@@ -71,14 +71,15 @@ class ChineseWordTokenizer:
                 if not loop:
                     break
 
-            i += 1
 
             if somethingFound:
                 word = u_str[i:i+lastCorrectLen]
+                print word, i, lastCorrectLen
                 if word:
                     words.append(word)
                     i += lastCorrectLen - 1
 
+            i += 1
 
         return words
 
