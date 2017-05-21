@@ -32,10 +32,10 @@ def test_3():
 def test_5():
     words = tokenizer.tokenize(u"政府依照法律行使执法权，如果超出法律赋予的权限范围，就是“滥用职权”；如果没有完全行使执法权，就是“不作为”。两者都是政府的错误。")
     print tokenizer.printable(words)
-    # should be: [ 政府 依照 法律 行使 执法 权 如果 超出 法律 赋予 的 权限 范围 就是 滥用职权 如果 没有 完全 行使 执法 权 就是 不 作为 两者 都 是 政府 的 错误 ]
-
+    gold = u"政府 依照 法律 行使 执法 权 如果 超出 法律 赋予 的 权限 范围 就是 滥用职权 如果 没有 完全 行使 执法 权 就是 不作为 两者 都 是 政府 的 错误".split()
+    for i, t in enumerate(gold):
+        assert words[i] == t
 
 def test_6():
     words = tokenizer.tokenize(u"国家都有自己的政府。政府是税收的主体，可以实现福利的合理利用。")
     print tokenizer.printable(words)
-    # should be [ 国家 都 有 自己 的 政府 政府 是 税收 的 主体 可以 实现 福利 的 合理 利用 ]

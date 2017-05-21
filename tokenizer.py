@@ -74,9 +74,8 @@ class ChineseWordTokenizer:
 
             if somethingFound:
                 word = u_str[i:i+lastCorrectLen]
-                print word, i, lastCorrectLen
                 if word:
-                    words.append(word)
+                    words.append(word.strip())
                     i += lastCorrectLen - 1
 
             i += 1
@@ -88,5 +87,6 @@ class ChineseWordTokenizer:
 
 if __name__ == "__main__":
     tokenizer = ChineseWordTokenizer(verbose=True)
-    tokens = tokenizer.tokenize(u"美国人的文化.dog")
-    print len(tokens), tokenizer.printable(tokens)
+    words = tokenizer.tokenize(u"国家都有自己的政府。政府是税收的主体，可以实现福利的合理利用。")
+    print tokenizer.printable(words)
+    print ' '.join(words)
