@@ -1,7 +1,7 @@
 # zh_tokenize
 
-[![Project status](https://img.shields.io/badge/Project%20Status-Complete-brightgreen.svg)](#status)
-
+[![Magnum CI](https://img.shields.io/magnumci/ci/96ffb83fa700f069024921b0702e76ff.svg)]()
+[![AUR](https://img.shields.io/aur/votes/yaourt.svg)]()
 
 Tokenize Chinese using a Trie (prefix-search) based on work done by @kennycason
 

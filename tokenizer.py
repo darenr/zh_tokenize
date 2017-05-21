@@ -85,9 +85,9 @@ class ChineseWordTokenizer:
         return words
 
     def printable(self, list):
-        return u' '.join(["[" + x + "]" for x in list])
+        return u', '.join(["[\"" + x + "\"]" for x in list])
 
 if __name__ == "__main__":
     tokenizer = ChineseWordTokenizer(verbose=True)
-    tokens = tokenizer.tokenize(u"国家都有自己的政府。政府是税收的主体，可以实现福利的合理利用。")
+    tokens = tokenizer.tokenize(u"美国人的文化.dog")
     print len(tokens), tokenizer.printable(tokens)
