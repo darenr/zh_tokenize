@@ -1,6 +1,6 @@
 # zh_tokenize
 
-[![Magnum CI](https://img.shields.io/magnumci/ci/96ffb83fa700f069024921b0702e76ff.svg)]()
+[![Travis CI](https://travis-ci.org/darenr/zh_tokenize.svg?branch=master)]()
 
 Tokenize Chinese using a Trie (prefix-search) based on work done by @kennycason
 
@@ -8,13 +8,10 @@ ZH gzipped file dictionary can be downloaded from:
 
 https://www.mdbg.net/chinese/dictionary?page=cc-cedict
 
-if this file is not in (do not gunzip)
-
-./dict/cedict_1_0_ts_utf-8_mdbg.txt.gz
+to use a different dictionary change dictionary_gzfile to the fill path of the
+gz file.
 
 (dictionary license http://creativecommons.org/licenses/by-sa/3.0/)
-
-export ZH_DICT=/fully/qualified/path/to/cedict-VERSION.gz
 
 Algorithm:
 
