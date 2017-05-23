@@ -1,3 +1,3 @@
 marisa-trie
-requests
 nose
+flake8
