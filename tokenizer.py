@@ -89,4 +89,3 @@ if __name__ == "__main__":
     tokenizer = ChineseWordTokenizer(verbose=True)
     words = tokenizer.tokenize(u"国家都有自己的政府。政府是税收的主体，可以实现福利的合理利用。")
     print tokenizer.printable(words)
-    print ' '.join(words)

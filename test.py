@@ -38,4 +38,8 @@ def test_5():
 
 def test_6():
     words = tokenizer.tokenize(u"国家都有自己的政府。政府是税收的主体，可以实现福利的合理利用。")
+    gold = u"国家 都 有 自己 的 政府 政府 是 税收 的 主体 可以 实现 福利 的 合理 利用".split()
     print tokenizer.printable(words)
+    for i, t in enumerate(gold):
+        print i, words[i], gold[i], words[i]==gold[i]
+        #assert words[i] == t
